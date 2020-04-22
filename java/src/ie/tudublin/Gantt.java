@@ -38,30 +38,32 @@ public class Gantt extends PApplet
 
 	public void displayTasks()
 	{
+		float wborder = width * 0.08f;
+		float hborder = height * 0.05f;
 		Table T = loadTable("tasks.csv", "header");
 		colorMode(HSB);
 		int color = 0;
 		float colorGap = 255 / 10.0f;
-		float border = width * 0.08f;
         stroke(0, 0, 255);
         textAlign(CENTER, CENTER);
         for(int i = 1 ; i <= 30 ; i ++)
         {
-			float x = map(i, 1, 30, border, width - border);
+			float x = map(i, 1, 30, wborder, width - wborder);
 			stroke(255);
-            line(x, border, x, height - border);
+            line(x, wborder, x, height - wborder);
             fill(255);
-            text(i, x, border / 2);
-		}	
+            text(i, x, wborder / 2);
+		}
 		for(int i = 0 ; i < 9 ; i ++)
         {
-			float y = map(i, 1, 9, border, height - border);
+			float y = map(i, 1, 9, hborder, height - hborder);
 			fill(255);
-			text(T.getString(i,"Task"), border-30, y/2+100);
+			text(T.getString(i,"Task"), hborder, y/2+100);
 			fill(color,255,255);
-			rect(border,y/2+95,border,15);
+			rect((width-2*wborder)*(T.getInt(i,"Start")-1)/29+wborder,y/2+95,(width-2*wborder)*(T.getInt(i,"End")-T.getInt(i,"Start"))/29,15);
 			color += colorGap;
 		}
+		
 	}
 
 	public void mousePressed()
@@ -86,5 +88,6 @@ public class Gantt extends PApplet
 	{			
 		background(0);
 		displayTasks();
+
 	}
 }
