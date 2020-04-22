@@ -10,7 +10,7 @@ public class Gantt extends PApplet
 {	
 	//declare an ArrayList to hold instances of the Task class
 	public ArrayList<Task> tasks = new ArrayList<Task>();
-
+	
 	public void settings()
 	{
 		size(800, 600);
@@ -38,7 +38,12 @@ public class Gantt extends PApplet
 
 	public void displayTasks()
 	{
-		float wborder = width * 0.08f;
+		float rectStart = 0;
+		float rectEnd = 0;
+		float recty = 0;
+
+
+		float wborder = width * 0.05f;
 		float hborder = height * 0.05f;
 		
 		colorMode(HSB);
@@ -46,20 +51,22 @@ public class Gantt extends PApplet
         textAlign(CENTER, CENTER);
         for(int i = 1 ; i <= 30 ; i ++)
         {
-			float x = map(i, 1, 30, wborder, width - wborder);
+			float x = map(i, 1, 30, wborder*2, width - wborder);
 			stroke(255);
-            line(x, wborder, x, height - wborder);
+            line(x, wborder, x, height - hborder);
             fill(255);
             text(i, x, wborder / 2);
 		}
 		for(int i = 0 ; i < tasks.size() ; i ++)
         {
+			rectStart = map(tasks.get(i).getStart(),1,30,wborder*2,width-wborder);
+			rectEnd = map(tasks.get(i).getEnd(),1,30,wborder*2,width-wborder);
+			recty = map(i,0,tasks.size(),hborder*2,height-hborder*2);
 			float colorGap = map(i, 0, tasks.size(), 0, 255);
-			float y = map(i, 1, 9, hborder, height - hborder);
 			fill(255);
-			text(tasks.get(i).getTask(), hborder, y/2+100);
+			text(tasks.get(i).getTask(), hborder, recty+10);
 			fill(colorGap,255,255);
-			rect((tasks.get(i).getStart()-1)*(width-2*wborder)/29+wborder,y/2+95,(width-2*wborder)*(tasks.get(i).getEnd()-tasks.get(i).getStart())/29,15);
+			rect(rectStart, recty,rectEnd-rectStart,15);
 		}
 	}
 
