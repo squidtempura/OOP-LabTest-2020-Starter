@@ -22,4 +22,16 @@ public class Task {
     public String toString() {
         return "Task [Task=" + task +",Start=" + start + ",End=" + end +"]";
     }
+
+    public String getTask() {
+        return task;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public int getEnd() {
+        return end;
+    }
 }

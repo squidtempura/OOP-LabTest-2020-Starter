@@ -11,9 +11,6 @@ public class Gantt extends PApplet
 	//declare an ArrayList to hold instances of the Task class
 	public ArrayList<Task> tasks = new ArrayList<Task>();
 
-	float bx;
-	float xoffset = 0; 
-
 	public void settings()
 	{
 		size(800, 600);
@@ -41,14 +38,10 @@ public class Gantt extends PApplet
 
 	public void displayTasks()
 	{
-		Table T = loadTable("tasks.csv", "header");
-
 		float wborder = width * 0.08f;
 		float hborder = height * 0.05f;
 		
 		colorMode(HSB);
-		
-		
         stroke(0, 0, 255);
         textAlign(CENTER, CENTER);
         for(int i = 1 ; i <= 30 ; i ++)
@@ -64,22 +57,21 @@ public class Gantt extends PApplet
 			float colorGap = map(i, 0, tasks.size(), 0, 255);
 			float y = map(i, 1, 9, hborder, height - hborder);
 			fill(255);
-			text(T.getString(i,"Task"), hborder, y/2+100);
+			text(tasks.get(i).getTask(), hborder, y/2+100);
 			fill(colorGap,255,255);
-			rect((width-2*wborder)*(T.getInt(i,"Start")-1)/29+wborder,y/2+95,(width-2*wborder)*(T.getInt(i,"End")-T.getInt(i,"Start"))/29,15);
+			rect((tasks.get(i).getStart()-1)*(width-2*wborder)/29+wborder,y/2+95,(width-2*wborder)*(tasks.get(i).getEnd()-tasks.get(i).getStart())/29,15);
 		}
 	}
 
 	public void mousePressed()
 	{
 		println("Mouse pressed");
-		xoffset = mouseX - bx;	
+		
 	}
 
 	public void mouseDragged()
 	{
 		println("Mouse dragged");
-		bx = mouseX - xoffset;
 	}
 
 	
