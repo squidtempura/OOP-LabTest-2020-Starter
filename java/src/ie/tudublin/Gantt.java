@@ -36,6 +36,21 @@ public class Gantt extends PApplet
         }	
 	}
 
+	public void displayTasks()
+	{
+		float border = width * 0.05f;
+        stroke(0, 0, 255);
+        textAlign(CENTER, CENTER);
+        for(int i = 1 ; i <= 30 ; i ++)
+        {
+			float x = map(i, 1, 30, border, width - border);
+			stroke(255);
+            line(x, border, x, height - border);
+            fill(255);
+            text(i, x, border / 2);
+		}	
+	}
+
 	public void mousePressed()
 	{
 		println("Mouse pressed");	
@@ -57,5 +72,6 @@ public class Gantt extends PApplet
 	public void draw()
 	{			
 		background(0);
+		displayTasks();
 	}
 }
