@@ -49,6 +49,14 @@ public class Gantt extends PApplet
             fill(255);
             text(i, x, border / 2);
 		}	
+		for(int i = 0 ; i < 9 ; i ++)
+        {
+			float y = map(i, 1, 9, border, height - border);
+			fill(255);
+			text(i, border/2, y/2+100);
+			fill(255);
+			rect(border,y/2+95,border,15);
+		}
 	}
 
 	public void mousePressed()
