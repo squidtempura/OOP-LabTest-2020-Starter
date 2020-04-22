@@ -20,6 +20,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task [Task=" + task +" ,Start=" + start + ",End=" + end +"]";
+        return "Task [Task=" + task +",Start=" + start + ",End=" + end +"]";
     }
 }

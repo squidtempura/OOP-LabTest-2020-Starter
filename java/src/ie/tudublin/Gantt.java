@@ -38,10 +38,11 @@ public class Gantt extends PApplet
 
 	public void displayTasks()
 	{
+		Table T = loadTable("tasks.csv", "header");
 		colorMode(HSB);
 		int color = 0;
 		float colorGap = 255 / 10.0f;
-		float border = width * 0.05f;
+		float border = width * 0.08f;
         stroke(0, 0, 255);
         textAlign(CENTER, CENTER);
         for(int i = 1 ; i <= 30 ; i ++)
@@ -56,7 +57,7 @@ public class Gantt extends PApplet
         {
 			float y = map(i, 1, 9, border, height - border);
 			fill(255);
-			text(i, border/2, y/2+100);
+			text(T.getString(i,"Task"), border-30, y/2+100);
 			fill(color,255,255);
 			rect(border,y/2+95,border,15);
 			color += colorGap;
